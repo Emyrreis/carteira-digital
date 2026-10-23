@@ -57,10 +57,31 @@ class _LoginViewState extends State<LoginView> {
                   onChanged: viewModel.onPasswordChanged,
                 ),
                 const Gap.xl(),
-                AppButton(
-                  key: const Key('login_submit'),
-                  label: 'Entrar',
-                  onPressed: viewModel.submit,
+                // Só este trecho redesenha quando o ViewModel avisa mudança.
+                ListenableBuilder(
+                  listenable: viewModel,
+                  builder: (context, _) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (viewModel.errorMessage case final message?) ...[
+                        Text(
+                          message,
+                          key: const Key('login_error'),
+                          textAlign: TextAlign.center,
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                        ),
+                        const Gap.md(),
+                      ],
+                      AppButton(
+                        key: const Key('login_submit'),
+                        label: 'Entrar',
+                        isLoading: viewModel.isLoading,
+                        onPressed: viewModel.submit,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

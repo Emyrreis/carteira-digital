@@ -178,6 +178,30 @@ abstract final class AppTheme {
         ),
       ),
       dividerTheme: DividerThemeData(color: p.outline, space: 1, thickness: 1),
+      // Chips (ex.: meses da Home): pílula verde-clara, verde quando escolhida.
+      chipTheme: ChipThemeData(
+        backgroundColor: p.surface,
+        selectedColor: p.primary,
+        checkmarkColor: p.onPrimary,
+        side: BorderSide.none,
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.pillAll),
+        labelStyle: AppTypography.bodyMedium.copyWith(color: p.onSurface),
+        secondaryLabelStyle: AppTypography.bodyMedium.copyWith(
+          color: p.onPrimary,
+        ),
+      ),
+      // Filtro segmentado (ex.: Todos/Receita/Despesa/Transf.).
+      segmentedButtonTheme: SegmentedButtonThemeData(
+        style: SegmentedButton.styleFrom(
+          backgroundColor: p.surface,
+          foregroundColor: p.onSurface,
+          selectedBackgroundColor: p.primary,
+          selectedForegroundColor: p.onPrimary,
+          side: BorderSide(color: p.background),
+          textStyle: AppTypography.bodyMedium,
+          shape: const RoundedRectangleBorder(borderRadius: AppRadius.pillAll),
+        ),
+      ),
     );
   }
 }
