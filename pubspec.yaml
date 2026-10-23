@@ -41,8 +41,6 @@ dependencies:
   carteira_core:
     path: packages/core
 
-  # Guarda a sessão (token) entre aberturas do app.
-  shared_preferences: ^2.3.0
 
 dev_dependencies:
   flutter_test:

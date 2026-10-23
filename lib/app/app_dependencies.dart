@@ -1,7 +1,7 @@
 import 'package:carteira_core/carteira_core.dart';
 import 'package:flutter/foundation.dart';
 
-import 'shared_prefs_session_storage.dart';
+import 'file_session_storage.dart';
 
 /// Objetos compartilhados por todas as cenas.
 ///
@@ -16,7 +16,7 @@ abstract final class AppDependencies {
 
   static final ApiClient apiClient = ApiClient(baseUrl: baseUrl);
 
-  static final SessionStorage sessionStorage = SharedPrefsSessionStorage();
+  static final SessionStorage sessionStorage = FileSessionStorage();
 
   static final AuthRepository auth = RemoteAuthRepository(
     client: apiClient,
