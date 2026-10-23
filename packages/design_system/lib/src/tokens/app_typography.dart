@@ -1,57 +1,80 @@
 import 'package:flutter/material.dart';
 
-/// Type scale built on the platform font.
+/// Type scale do Finance Management: Poppins, empacotada neste pacote.
 ///
-/// No external font is bundled: the course keeps the dependency list short
-/// and the platform face is the correct default for a finance app.
+/// Referências do Finance Management (lib/common/app_text_styles.dart):
+/// title 20/w600, subtitle 15/w500, paragraph 13/w300.
 abstract final class AppTypography {
+  static const String fontFamily = 'Poppins';
+  static const String fontPackage = 'carteira_design_system';
+
   static const TextStyle displayLarge = TextStyle(
+    fontFamily: fontFamily,
+    package: fontPackage,
     fontSize: 40,
     fontWeight: FontWeight.w700,
     height: 1.1,
     letterSpacing: -0.5,
   );
   static const TextStyle headlineMedium = TextStyle(
+    fontFamily: fontFamily,
+    package: fontPackage,
     fontSize: 28,
     fontWeight: FontWeight.w700,
     height: 1.2,
   );
   static const TextStyle titleLarge = TextStyle(
-    fontSize: 22,
+    fontFamily: fontFamily,
+    package: fontPackage,
+    fontSize: 20, // FM title
     fontWeight: FontWeight.w600,
-    height: 1.25,
+    height: 1.1,
   );
   static const TextStyle titleMedium = TextStyle(
-    fontSize: 17,
-    fontWeight: FontWeight.w600,
+    fontFamily: fontFamily,
+    package: fontPackage,
+    fontSize: 15, // FM subtitle
+    fontWeight: FontWeight.w500,
     height: 1.3,
   );
   static const TextStyle titleSmall = TextStyle(
+    fontFamily: fontFamily,
+    package: fontPackage,
     fontSize: 14,
     fontWeight: FontWeight.w600,
     height: 1.3,
   );
   static const TextStyle bodyLarge = TextStyle(
+    fontFamily: fontFamily,
+    package: fontPackage,
     fontSize: 17,
     fontWeight: FontWeight.w400,
     height: 1.45,
   );
   static const TextStyle bodyMedium = TextStyle(
+    fontFamily: fontFamily,
+    package: fontPackage,
     fontSize: 15,
     fontWeight: FontWeight.w400,
     height: 1.45,
   );
   static const TextStyle bodySmall = TextStyle(
-    fontSize: 13,
-    fontWeight: FontWeight.w400,
+    fontFamily: fontFamily,
+    package: fontPackage,
+    fontSize: 13, // FM paragraph
+    fontWeight: FontWeight.w300,
     height: 1.4,
   );
   static const TextStyle labelLarge = TextStyle(
-    fontSize: 15,
-    fontWeight: FontWeight.w600,
+    fontFamily: fontFamily,
+    package: fontPackage,
+    fontSize: 15, // texto dos botões
+    fontWeight: FontWeight.w500,
     height: 1.2,
   );
   static const TextStyle labelSmall = TextStyle(
+    fontFamily: fontFamily,
+    package: fontPackage,
     fontSize: 11,
     fontWeight: FontWeight.w600,
     height: 1.2,

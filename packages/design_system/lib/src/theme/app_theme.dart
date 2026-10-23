@@ -7,6 +7,9 @@ import '../tokens/app_typography.dart';
 import 'app_semantic_colors.dart';
 
 /// Builds the two [ThemeData] of the app from the tokens.
+///
+/// Visual do Finance Management: botões em pílula, campos preenchidos sem
+/// borda, cards e modais sem contorno com cantos de 20.
 abstract final class AppTheme {
   static ThemeData light() => _build(AppColors.light, Brightness.light);
 
@@ -58,10 +61,7 @@ abstract final class AppTheme {
         color: p.surface,
         elevation: 0,
         margin: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          borderRadius: AppRadius.lgAll,
-          side: BorderSide(color: p.outline),
-        ),
+        shape: const RoundedRectangleBorder(borderRadius: AppRadius.lgAll),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -70,17 +70,17 @@ abstract final class AppTheme {
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.md,
         ),
-        border: OutlineInputBorder(
+        border: const OutlineInputBorder(
           borderRadius: AppRadius.mdAll,
-          borderSide: BorderSide(color: p.outline),
+          borderSide: BorderSide.none,
         ),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderRadius: AppRadius.mdAll,
-          borderSide: BorderSide(color: p.outline),
+          borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: AppRadius.mdAll,
-          borderSide: BorderSide(color: p.primary, width: 2),
+          borderSide: BorderSide(color: p.primary, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: AppRadius.mdAll,
@@ -91,35 +91,43 @@ abstract final class AppTheme {
           borderSide: BorderSide(color: p.error, width: 2),
         ),
         labelStyle: AppTypography.bodyMedium.copyWith(color: p.onSurfaceMuted),
-        hintStyle: AppTypography.bodyMedium.copyWith(color: p.onSurfaceMuted),
+        hintStyle: AppTypography.bodyMedium.copyWith(color: p.primary),
+        prefixIconColor: p.onSurface,
+        suffixIconColor: p.onSurface,
       ),
+      // Primário: pílula verde com texto escuro.
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          minimumSize: const Size.fromHeight(48),
-          shape: const RoundedRectangleBorder(borderRadius: AppRadius.mdAll),
+          minimumSize: const Size.fromHeight(45),
+          backgroundColor: p.primary,
+          foregroundColor: p.onPrimary,
+          shape: const RoundedRectangleBorder(borderRadius: AppRadius.pillAll),
           textStyle: AppTypography.labelLarge,
         ),
       ),
+      // Secundário: pílula verde-clara (botão "não ativo" do Finance Management).
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          minimumSize: const Size.fromHeight(48),
-          shape: const RoundedRectangleBorder(borderRadius: AppRadius.mdAll),
-          side: BorderSide(color: p.outline),
-          foregroundColor: p.onSurface,
+          minimumSize: const Size.fromHeight(45),
+          backgroundColor: p.primaryContainer,
+          foregroundColor: p.onPrimaryContainer,
+          side: BorderSide.none,
+          shape: const RoundedRectangleBorder(borderRadius: AppRadius.pillAll),
           textStyle: AppTypography.labelLarge,
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           minimumSize: const Size(48, 44),
-          shape: const RoundedRectangleBorder(borderRadius: AppRadius.mdAll),
+          foregroundColor: p.onSurface,
+          shape: const RoundedRectangleBorder(borderRadius: AppRadius.pillAll),
           textStyle: AppTypography.labelLarge,
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: p.primary,
         foregroundColor: p.onPrimary,
-        shape: const RoundedRectangleBorder(borderRadius: AppRadius.lgAll),
+        shape: const CircleBorder(),
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,

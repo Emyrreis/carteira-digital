@@ -1,11 +1,11 @@
 import 'package:flutter/painting.dart';
 
-/// Corner radii.
+/// Corner radii (valores do Finance Management).
 abstract final class AppRadius {
-  static const double sm = 6;
-  static const double md = 10;
-  static const double lg = 16;
-  static const double pill = 999;
+  static const double sm = 8; // ícones com borda, chips
+  static const double md = 12; // campos de texto
+  static const double lg = 20; // cards e modais
+  static const double pill = 999; // botões em pílula
 
   static const BorderRadius smAll = BorderRadius.all(Radius.circular(sm));
   static const BorderRadius mdAll = BorderRadius.all(Radius.circular(md));

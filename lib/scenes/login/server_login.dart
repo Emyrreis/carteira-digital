@@ -18,7 +18,7 @@ class LoginMockServer implements ServerLogin {
   @override
   Future<Result>fetchLogin({ required String email,  required String password,}) async {
 
-    'if (email.isEmpty || password.isEmpty) {
+    if (email.isEmpty || password.isEmpty) {
       return const Failure(ValidationError({}, detail: 'Campos vazios'));
     }
 
