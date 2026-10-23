@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:carteira_core/carteira_core.dart';
-import 'package:flutter/foundation.dart';
-
+import 'package:flutter/foundation.dart' show ChangeNotifier;
 import 'home_coordinator.dart';
 import 'server_home.dart';
 
