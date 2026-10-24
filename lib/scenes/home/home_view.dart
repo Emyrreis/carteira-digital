@@ -39,8 +39,10 @@ class _HomeViewState extends State<HomeView> {
     return ListenableBuilder(
       listenable: viewModel,
       builder: (context, _) => AppScaffold(
-        title: 'Carteira',
-        actions: const [ThemeModeButton()],
+        title: viewModel.selectedTab == 0 ? 'Carteira' : 'Perfil',
+        actions: viewModel.selectedTab == 0
+            ? const [ThemeModeButton()]
+            : null,
         padded: false,
         // IndexedStack keeps each tab alive (scroll, search text).
         body: IndexedStack(
@@ -230,6 +232,7 @@ class _List extends StatelessWidget {
               title: item.title,
               subtitle: item.subtitle,
               amount: item.amount,
+              onTap: () => viewModel.onTransactionTapped(item.id),
             ),
         ],
       ],

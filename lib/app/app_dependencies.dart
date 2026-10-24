@@ -1,6 +1,5 @@
 import 'package:carteira_core/carteira_core.dart';
 import 'package:flutter/foundation.dart';
-import 'memory_session_storage.dart';
 
 import 'file_session_storage.dart';
 
@@ -18,7 +17,7 @@ abstract final class AppDependencies {
   static final ApiClient apiClient = ApiClient(baseUrl: baseUrl);
 
   static final SessionStorage sessionStorage =
-  kIsWeb ? MemorySessionStorage() : FileSessionStorage();
+  kIsWeb ? InMemorySessionStorage() : FileSessionStorage();
 
   static final AuthRepository auth = RemoteAuthRepository(
     client: apiClient,

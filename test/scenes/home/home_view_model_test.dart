@@ -62,6 +62,9 @@ class _FakeHomeCoordinator implements HomeCoordinator {
 
   @override
   void goToNewTransaction() {}
+
+  @override
+  Future<bool> goToTransactionDetail(String id) async => false;
 }
 
 void main() {

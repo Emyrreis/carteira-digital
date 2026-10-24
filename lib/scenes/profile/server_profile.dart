@@ -7,6 +7,9 @@ abstract interface class ServerProfile {
   /// Signed-in user: `GET /me`.
   Future<Result<User>> fetchProfile();
 
+  /// Saves name and photo: `PUT /me`.
+  Future<Result<User>> updateProfile({required String name, String? avatarUrl});
+
   /// Ends the session on the server and clears the storage.
   Future<void> logout();
 }
@@ -22,6 +25,12 @@ class ProfileServer implements ServerProfile {
 
   @override
   Future<Result<User>> fetchProfile() => _users.getProfile();
+
+  @override
+  Future<Result<User>> updateProfile({
+    required String name,
+    String? avatarUrl,
+  }) => _users.updateProfile(name: name, avatarUrl: avatarUrl);
 
   @override
   Future<void> logout() async {

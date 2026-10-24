@@ -11,3 +11,12 @@ void replaceRoot(Widget screen) {
     (_) => false,
   );
 }
+
+/// Mostra uma mensagem rápida (SnackBar) na tela atual.
+void showAppMessage(String message) {
+  final context = appNavigatorKey.currentContext;
+  if (context == null) return;
+  ScaffoldMessenger.of(context)
+    ..hideCurrentSnackBar()
+    ..showSnackBar(SnackBar(content: Text(message)));
+}

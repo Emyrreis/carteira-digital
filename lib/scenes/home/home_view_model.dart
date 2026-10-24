@@ -17,6 +17,7 @@ typedef HomeCategory = ({String label, String amount, double share});
 
 /// One transaction row, already formatted for the screen.
 typedef HomeItem = ({
+  String id,
   HomeItemKind kind,
   String title,
   String subtitle,
@@ -100,6 +101,13 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   void onAddPressed() => _coordinator.goToNewTransaction();
+
+  /// Row tapped: opens the detail. If it was deleted there, reload the month
+  /// (list, balance and categories all change).
+  Future<void> onTransactionTapped(String id) async {
+    final deleted = await _coordinator.goToTransactionDetail(id);
+    if (deleted) await _loadMonth();
+  }
 
   // ── Loading ──────────────────────────────────────────────────────────────
 
@@ -215,6 +223,7 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   HomeItem _item(Transaction t) => (
+    id: t.id,
     kind: switch (t) {
       Income() => HomeItemKind.income,
       Expense() => HomeItemKind.expense,
