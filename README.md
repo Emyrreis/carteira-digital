@@ -18,14 +18,15 @@ lib/
 ├── main.dart                 # MaterialApp: tema, navigatorKey, abre a Splash
 ├── app/                      # O que é compartilhado pelas cenas
 │   ├── app_dependencies.dart #   ApiClient + repositórios do Core (uma instância)
-│   ├── shared_prefs_session_storage.dart # guarda a sessão no aparelho
+│   ├── file_session_storage.dart # guarda a sessão num arquivo (Dart puro, sem plugin)
 │   ├── app_navigator.dart    #   navigatorKey usada pelos coordinators
 │   └── theme_mode_button.dart#   alterna tema claro/escuro
 └── scenes/                   # Uma pasta por cena, sempre com os mesmos 5 papéis
     ├── splash/   (tela invisível: decide Login ou Home)
     ├── login/
     ├── home/     (aba Lançamentos)
-    └── profile/  (aba Perfil)
+    ├── profile/  (aba Perfil)
+    └── transaction_detail/ (detalhe de um lançamento, com excluir)
 packages/
 ├── core/           # Modelos, Result, ApiClient e repositórios (contrato da API)
 └── design_system/  # Tokens, tema e componentes (visual Finance Management)
@@ -63,6 +64,8 @@ flowchart TD
     H -->|401 token inválido| L
     H --> P[Aba Perfil: GET /me]
     P -->|Sair: POST /auth/logout → limpa storage| L
+    H -->|toque num lançamento| D[Detalhe: GET /transactions/:id]
+    D -->|Excluir: DELETE /transactions/:id| H
 ```
 
 ### Home (aba Lançamentos)
@@ -72,3 +75,8 @@ flowchart TD
 - **Por categoria** → `CategoryBar`, só despesas, % sobre o total de saídas.
 - **Busca e filtro Todos/Receita/Despesa/Transf.** → `GET /transactions?q=&type=`.
 - **Lista por dia** → `SectionHeader` + `TransactionTile`.
+
+### Detalhe do lançamento
+
+- Abre ao tocar numa linha da lista → `GET /transactions/:id`.
+- **Lixeira** → `DELETE /transactions/:id`, volta para a Home e recarrega o mês.

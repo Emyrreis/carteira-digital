@@ -4,18 +4,29 @@ import 'dart:io';
 import 'package:carteira_core/carteira_core.dart';
 
 /// [SessionStorage] do app: guarda a sessão como JSON num arquivo na pasta
-/// do próprio app (no Android, o cache interno do app).
+/// do próprio app.
 ///
 /// Dart puro (dart:io), sem plugin: funciona mesmo em PCs onde o Windows
 /// não deixa ativar o Modo de Desenvolvedor.
 class FileSessionStorage implements SessionStorage {
   FileSessionStorage({Directory? directory})
       : _file = File(
-    '${(directory ?? Directory.systemTemp).path}'
+    '${(directory ?? _defaultDirectory()).path}'
         '${Platform.pathSeparator}carteira_session.json',
   );
 
   final File _file;
+
+  /// No Android, `systemTemp` é a pasta de cache do app, que o sistema pode
+  /// limpar sozinho (e deslogar o usuário). A pasta `files` ao lado dela é a
+  /// pasta interna permanente do app. Nas outras plataformas, usa `systemTemp`.
+  static Directory _defaultDirectory() {
+    final temp = Directory.systemTemp;
+    if (Platform.isAndroid) {
+      return Directory('${temp.parent.path}${Platform.pathSeparator}files');
+    }
+    return temp;
+  }
 
   @override
   Future<Session?> read() async {
@@ -32,6 +43,7 @@ class FileSessionStorage implements SessionStorage {
 
   @override
   Future<void> write(Session session) async {
+    await _file.parent.create(recursive: true);
     await _file.writeAsString(jsonEncode(session.toJson()), flush: true);
   }
 
